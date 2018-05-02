@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                                    http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd">
+
+    <changeSet author="aderenco" id="1">
+
+        <sql>
+            create table book.books (
+            ID int(25) not null primary key,
+            TITLE varchar(225) not null,
+            EDITION varchar(225) not null
+            AUTHOR_LIST varchar(255) not null,
+            CONSTRAINT FK_AUTHOR
+            FOREIGN KEY REFERENCES book.authors (AUTHOR_ID)
+            );
+        </sql>
+    </changeSet>
+
+</databaseChangeLog>
