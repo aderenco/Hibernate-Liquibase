@@ -6,12 +6,12 @@ import java.util.Objects;
 import java.util.Set;
 
 @Entity
-@Table(name = "BOOKS")
+@Table(name = "BOOK")
 public class Book {
 
     @Id
-    @Column(name = "ID")
-    private long id;
+    @Column(name = "BOOK_ID")
+    private Long id;
 
     @Column(name = "TITLE")
     private String title;
@@ -20,46 +20,19 @@ public class Book {
     private String edition;
 
     @ElementCollection
-    @JoinTable(name = "BOOKS_AUTHORS")
+    @CollectionTable(name = "author", joinColumns = @JoinColumn(name = "BOOK_ID"))
     private Set<Author> authors = new HashSet<>();
 
     private Book() { //for JPA
     }
 
-    public Book(long id, String title, Set<Author> authors) {
+    public Book(long id, String title, String edition, Set<Author> authors) {
         this.id = id;
         this.title = title;
+        this.edition = edition;
         this.authors = authors;
     }
 
-    public Book(long id, String title) {
-        this.id = id;
-        this.title = title;
-    }
-
-    public long getId() {
-        return id;
-    }
-
-    public void setId(long id) {
-        this.id = id;
-    }
-
-    public String getTitle() {
-        return title;
-    }
-
-    public void setTitle(String title) {
-        this.title = title;
-    }
-
-    public Set<Author> getAuthors() {
-        return authors;
-    }
-
-    public void setAuthors(Set<Author> authors) {
-        this.authors = authors;
-    }
 
     @Override
     public boolean equals(Object o) {
